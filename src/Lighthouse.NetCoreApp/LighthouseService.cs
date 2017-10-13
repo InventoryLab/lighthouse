@@ -10,12 +10,11 @@
 // under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the 
 // specific language governing permissions and limitations under the License.
+
 using System.Threading.Tasks;
 using Akka.Actor;
-using Petabridge.Cmd.Host;
-using Petabridge.Cmd.Cluster;
 
-namespace Lighthouse
+namespace Lighthouse.NetCoreApp
 {
     public class LighthouseService
     {
@@ -35,10 +34,6 @@ namespace Lighthouse
         public void Start()
         {
             _lighthouseSystem = LighthouseHostFactory.LaunchLighthouse(_ipAddress, _port);
-            var cmd = PetabridgeCmd.Get(_lighthouseSystem);
-            cmd.RegisterCommandPalette(ClusterCommands.Instance);
-            cmd.Start();
-            _lighthouseSystem.WhenTerminated.Wait();
         }
 
         public async Task StopAsync()

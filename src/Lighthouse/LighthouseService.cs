@@ -38,7 +38,6 @@ namespace Lighthouse
             var cmd = PetabridgeCmd.Get(_lighthouseSystem);
             cmd.RegisterCommandPalette(ClusterCommands.Instance);
             cmd.Start();
-            _lighthouseSystem.WhenTerminated.Wait();
         }
 
         public async Task StopAsync()

@@ -11,6 +11,7 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the 
 // specific language governing permissions and limitations under the License.
 
+using System.Configuration;
 using Topshelf;
 
 namespace Lighthouse
@@ -21,6 +22,7 @@ namespace Lighthouse
         {
             return (int) HostFactory.Run(x =>
             {
+                string version = typeof(LighthouseService).Assembly.GetName().Version.ToString();
                 x.Service<LighthouseService>(s =>
                 {
                     s.ConstructUsing(ss => new LighthouseService());
@@ -29,8 +31,8 @@ namespace Lighthouse
                 });
 
                 x.SetServiceName("Akka.Net_Lighthouse_For_Order_Cluster");
-                x.SetDisplayName("Akka.Net Lighthouse Service Discovery For Order Cluster ");
-                x.SetDescription("Lighthouse Service Discovery for Akka.NET Order Clusters");
+                x.SetDisplayName("Ilab_OrderCluster_Lighthouse_" + version + " (Instance: " + ConfigurationManager.AppSettings.Get("Environment") + ")");
+                x.SetDescription("Ilab_OrderCluster_Lighthouse_" + version + " (Instance: " + ConfigurationManager.AppSettings.Get("Environment") + ")");
 
                 x.RunAsNetworkService();
                 x.StartAutomatically();

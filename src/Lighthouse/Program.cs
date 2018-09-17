@@ -30,7 +30,7 @@ namespace Lighthouse
                     s.WhenStopped(ss => ss.StopAsync().Wait());
                 });
 
-                x.SetServiceName("Akka.Net_Lighthouse_For_Order_Cluster");
+                x.SetServiceName("Akka.Net_Lighthouse_For_Order_Cluster" + version + " (Instance: " + ConfigurationManager.AppSettings.Get("Environment") + ")");
                 x.SetDisplayName("Ilab_OrderCluster_Lighthouse_" + version + " (Instance: " + ConfigurationManager.AppSettings.Get("Environment") + ")");
                 x.SetDescription("Ilab_OrderCluster_Lighthouse_" + version + " (Instance: " + ConfigurationManager.AppSettings.Get("Environment") + ")");
 

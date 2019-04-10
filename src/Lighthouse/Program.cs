@@ -30,9 +30,11 @@ namespace Lighthouse
                     s.WhenStopped(ss => ss.StopAsync().Wait());
                 });
 
-                x.SetServiceName("Akka.Net_Lighthouse_For_Order_Cluster" + version + " (Instance: " + ConfigurationManager.AppSettings.Get("Environment") + ")");
-                x.SetDisplayName("Ilab_OrderCluster_Lighthouse_" + version + " (Instance: " + ConfigurationManager.AppSettings.Get("Environment") + ")");
-                x.SetDescription("Ilab_OrderCluster_Lighthouse_" + version + " (Instance: " + ConfigurationManager.AppSettings.Get("Environment") + ")");
+                var lighthouseServiceName = ConfigurationManager.AppSettings["IsolatedServiceLighthouseName"] ?? "lighthouse";
+
+                x.SetServiceName("Ilab_" + lighthouseServiceName + "_" + version + " (Instance: " + ConfigurationManager.AppSettings.Get("Environment") + ")");
+                x.SetDisplayName("Ilab_"+ lighthouseServiceName + "_" + version + " (Instance: " + ConfigurationManager.AppSettings.Get("Environment") + ")");
+                x.SetDescription("Ilab_"+ lighthouseServiceName + "_" + version + " (Instance: " + ConfigurationManager.AppSettings.Get("Environment") + ")");
 
                 x.RunAsNetworkService();
                 x.StartAutomatically();
